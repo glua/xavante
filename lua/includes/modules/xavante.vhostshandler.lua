@@ -6,10 +6,13 @@
 --
 -- $Id: vhostshandler.lua,v 1.3 2007/08/20 22:20:44 carregal Exp $
 -----------------------------------------------------------------------------
+_G.xavante = xavante or {}
 
-return function (vhosts)
+xavante.vhostshandler = function (vhosts)
          return function (req, res)
                   local h = vhosts [req.headers.host] or vhosts [""]
                   return h (req, res)
                 end
        end
+
+return xavante.vhostshandler

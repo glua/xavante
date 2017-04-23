@@ -22,7 +22,7 @@ local function match_url (req, conf)
   end
 end
 
-return function (conf)
+xavante.patternhandler = function (conf)
          if not conf or type (conf) ~= "table" then return nil end
 
          return function (req, res)
@@ -31,3 +31,5 @@ return function (conf)
                   return h (req, res, cap)
                 end
        end
+
+return xavante.patternhandler

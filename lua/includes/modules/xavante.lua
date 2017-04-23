@@ -11,14 +11,15 @@
 --
 -- $Id: xavante.lua,v 1.13 2009/03/06 23:44:23 carregal Exp $
 -------------------------------------------------------------------------------
+_G.xavante = xavante or {}
 
 local _M = {}
 
-local copas = require "copas"
-local httpd = require "xavante.httpd"
-local string = require "string"
-local phandler = require "xavante.patternhandler"
-local vhosts = require "xavante.vhostshandler"
+local copas = require "copas" or copas
+local httpd = require "xavante.httpd" or xavante.httpd
+local string = require "string" or string
+local phandler = require "xavante.patternhandler" or xavante.patternhandler
+local vhosts = require "xavante.vhostshandler" or xavante.vhostshandler
 
 -- Meta information is public even begining with an "_"
 _M._COPYRIGHT   = "Copyright (C) 2004-2016 Kepler Project"
@@ -108,5 +109,7 @@ end
 function _M.setwebdir(dir)
   _M._webdir = dir
 end
+
+_G.xavante = _M
 
 return _M

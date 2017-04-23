@@ -7,7 +7,7 @@
 -- $Id: urlhandler.lua,v 1.3 2007/08/20 22:20:44 carregal Exp $
 -----------------------------------------------------------------------------
 
-local httpd = require "xavante.httpd"
+local httpd = require "xavante.httpd" or xavante.httpd
 
 local function path_p (s, p)
         if not p then return s end
@@ -38,7 +38,7 @@ local function match_url (req, conf)
         req.handler = h
 end
 
-return function (conf)
+xavante.urlhandler = function (conf)
          if not conf or type (conf) ~= "table" then return nil end
 
          return function (req, res)
@@ -47,3 +47,5 @@ return function (conf)
                   return h (req, res)
                 end
        end
+
+return xavante.urlhandler

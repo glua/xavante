@@ -6,15 +6,15 @@
 --
 -- $Id: httpd.lua,v 1.45 2009/08/10 20:00:59 mascarenhas Exp $
 -----------------------------------------------------------------------------
+_G.xavante = xavante or {}
 
-local string = require "string"
-local table = require "table"
-local os = require "os"
-local io = require "io"
+local string = string
+local table = table
+local os = os
 
-local socket = require "socket"
-local url = require "socket.url"
-local copas = require "copas"
+local socket = require "socket" or socket
+local url = require "socket.url" or socket.url
+local copas = require "copas" or copas
 
 local unpack = table.unpack or unpack
 
@@ -74,7 +74,7 @@ end
 
 function _M.errorhandler (msg, co, skt)
     msg = tostring(msg)
-        io.stderr:write("  Xavante Error: "..msg.."\n", "  "..tostring(co).."\n", "  "..tostring(skt).."\n")
+        print("  Xavante Error: "..msg.."\n", "  "..tostring(co).."\n", "  "..tostring(skt).."\n")
         skt:send ("HTTP/1.0 200 OK\r\n")
         skt:send (string.format ("Date: %s\r\n\r\n", os.date ("!%a, %d %b %Y %H:%M:%S GMT")))
         skt:send (string.format ([[
@@ -387,5 +387,7 @@ function _M.get_ports()
   end
   return ports
 end
+
+xavante.httpd = _M
 
 return _M
